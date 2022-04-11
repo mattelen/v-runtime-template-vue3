@@ -112,7 +112,7 @@ export default {
       };
       // debugger;
 
-      return h(dynamic, {...finalProps});
+      return h(dynamic, {...finalProps}, this.$slots);
     }
   },
 };
