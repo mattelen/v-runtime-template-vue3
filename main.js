@@ -1,10 +1,8 @@
-import Vue from "vue";
+import { createApp } from 'vue'
 import App from "./App.vue";
 
-import testPlugin from "./test.plugin.js"; //testing mixins
+import testPlugin from "./plugin.test.js"; //testing mixins
 
-Vue.use(testPlugin);
-
-new Vue({
-    render: h => h(App)
-}).$mount("#app");
+createApp({
+  render: (h) => h(App),
+}).use(testPlugin).mount("#app");

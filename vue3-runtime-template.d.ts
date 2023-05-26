@@ -1,1 +1,1 @@
-declare module 'vue3-runtime-template'
+declare module "vue3-runtime-template";

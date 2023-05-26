@@ -68,33 +68,34 @@ In [Nuxt v3](https://v3.nuxtjs.org/), open the `nuxt.config.js` file and extend 
 ```
 
 You can read about different bundles of Vue in the official [help guides](https://v3.vuejs.org/guide/installation.html#with-a-bundler).
+
 ## Usage
 
 You just need to import the `vue3-runtime-template` component, and pass the template you want:
 
 ```html
 <template>
-	<div>
-		<v-runtime-template :template="template"></v-runtime-template>
-	</div>
+  <div>
+    <v-runtime-template :template="template"></v-runtime-template>
+  </div>
 </template>
 
 <script>
-import VRuntimeTemplate from "vue3-runtime-template";
-import AppMessage from "./AppMessage";
+  import VRuntimeTemplate from "vue3-runtime-template";
+  import AppMessage from "./AppMessage";
 
-export default {
-  data: () => ({
-    name: "Mellow",
-    template: `
+  export default {
+    data: () => ({
+      name: "Mellow",
+      template: `
       <app-message>Hello {{ name }}!</app-message>
-    `
-  }),
-  components: {
-    AppMessage,
-    VRuntimeTemplate
-  }
-};
+    `,
+    }),
+    components: {
+      AppMessage,
+      VRuntimeTemplate,
+    },
+  };
 </script>
 ```
 
