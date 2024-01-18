@@ -131,6 +131,80 @@ export default {
 
 Keep in mind that the template can only access the instance properties of the component who is using it.
 
+## Usage With <script setup>
+
+If you encounter a situation where you need to pass additional properties to the template when using `<v-runtime-template>`, you can leverage the `templateProps` property. This workaround is not explicitly mentioned in the official documentation.
+
+Here's an example of how you can use it:
+
+```
+<template>
+  <div>
+    <h1>Product</h1>
+    <v-runtime-template
+      :template="productContent"
+      :template-props="templateProps"
+    ></v-runtime-template>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import VRuntimeTemplate from 'vue3-runtime-template'
+
+const thing = ref('pineapple pizza')
+const templateProps = {
+  thing,
+}
+const productContent = '<p>You can now buy a new <strong>{{ thing }}</strong> from us!</p>'
+</script>
+```
+
+## Using Custom Components with vue3-runtime-template
+
+If you have custom components, such as `YourComponent`, and you're using `vue3-runtime-template` in your Vue 3 application, follow these steps to seamlessly integrate them:
+
+### Register YourComponent
+
+   In your main entry file, typically `main.js` or `main.ts`, ensure that your custom component, like `YourComponent`, is registered globally using `app.component`. For example:
+
+```
+import { createApp } from 'vue';
+import { YourComponent } from '@/components/YourComponent.vue';
+import App from './App.vue';
+
+const app = createApp(App);
+
+app.component('YourComponent', YourComponent);
+
+app.mount('#app');
+```
+
+Replace `YourComponent` with the actual name of your component.
+
+### Include YourComponent in vue3-runtime-template:
+
+Utilize `vue3-runtime-template` to dynamically render templates, including your custom component. Here's an example:
+
+```
+<template>
+  <div>
+    <!-- VRuntimeTemplate with YourComponent -->
+    <VRuntimeTemplate 
+      :template="yourTemplateString"
+      :templateProps="{
+        YourComponent
+      }"
+    />
+  </div>
+</template>
+
+<script setup>
+  // No need to import YourComponent here, as it's registered globally
+  const yourTemplateString = '<YourComponent />';
+</script>
+```
+
 ## Comparison
 
 ### vue3-runtime-template VS v-html
